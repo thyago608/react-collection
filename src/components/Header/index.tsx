@@ -12,9 +12,7 @@ export function Header() {
                         <Image src="/logo.png" alt="collection" layout="fill" />
                     </a>
                 </Link>
-                <div className={styles.input}>
-                    <Input />
-                </div>
+                <Input />
                 <button
                     type="button"
                     className={styles.buttonAddNewMaterial}
