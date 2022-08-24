@@ -4,7 +4,7 @@
   border-radius: 0.3rem;
 
   width: 250px;
-  height: 270px;
+  height: 300px;
 
   display: flex;
   flex-direction: column;
@@ -20,11 +20,43 @@
     height: 80%;
   }
 
-  .description {
+  .text {
+    .line {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
   }
 
-  .line {
-    font-weight: 600;
-    font-size: 0.9rem;
+  .actions {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-evenly;
+
+    button {
+      border: 0;
+
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      transition: filter 0.2s ease;
+
+      &.tool svg {
+        color: #33cc95;
+      }
+
+      &.trash svg {
+        color: #e52e54;
+      }
+
+      &:hover {
+        filter: brightness(0.8);
+      }
+    }
   }
 }
