@@ -1,5 +1,43 @@
-.header-container {
+.container {
+  background: #001011;
+  padding: 1.5rem;
 }
 
-.header-content {
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 12rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .logo {
+    display: block;
+    position: relative;
+
+    width: 135px;
+    height: 35px;
+  }
+
+  .input {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .buttonAddNewMaterial {
+    border: 0;
+    border-radius: 0.25rem;
+
+    padding: 0 0.8rem;
+    height: 2.5rem;
+
+    background: rgba(#ffc400, 0.85);
+    transition: filter 0.3s ease;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 }

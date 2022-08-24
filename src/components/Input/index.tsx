@@ -1,11 +1,12 @@
 import { FiSearch, FiX } from "react-icons/fi";
+import styles from "./styles.module.scss";
 
 export function Input() {
     return (
-        <div>
+        <div className={styles.container}>
             <input
                 type="text"
-                placeholder="Você pode pesquisar descrição e linha"
+                placeholder="Pesquise por descrição ou linha"
             />
             <button type="button">
                 <FiSearch />

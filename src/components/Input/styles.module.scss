@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  input {
+    flex: 1;
+
+    border: 0;
+    border-radius: 2.5rem;
+
+    height: 2.5rem;
+    padding: 0 0.8rem;
+
+    background: #000;
+    color: #d2d2d2;
+
+    &::placeholder {
+      font-size: 13px;
+    }
+  }
+
+  button {
+    width: 2rem;
+    height: 2rem;
+
+    border: 0;
+    border-radius: 2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: transparent;
+
+    svg {
+      color: #fff;
+    }
+
+    &:hover {
+      opacity: 0.2;
+    }
+  }
+
+  @media (min-width: 768px) {
+    input {
+      font-size: 1rem;
+    }
+  }
+}

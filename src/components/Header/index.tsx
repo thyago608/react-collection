@@ -5,15 +5,20 @@ import styles from "./styles.module.scss";
 
 export function Header() {
     return (
-        <header className="header-container">
-            <div className="header-content">
+        <header className={styles.container}>
+            <div className={styles.content}>
                 <Link href="/">
-                    <a>
-                        <Image src="" alt="" />
+                    <a className={styles.logo}>
+                        <Image src="/logo.png" alt="collection" layout="fill" />
                     </a>
                 </Link>
-                <Input />
-                <button type="button">Inserir novo material</button>
+                <div className={styles.input}>
+                    <Input />
+                </div>
+                <button
+                    type="button"
+                    className={styles.buttonAddNewMaterial}
+                >Inserir novo material</button>
             </div>
         </header>
     );
