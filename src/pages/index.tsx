@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { ToastContainer } from "react-toastify";
-import { toastError } from "utils/toasts";
+import { toastError, toastSuccess } from "utils/toasts";
 import { Product } from "components/Product";
 import { useProducts } from "hooks/useProducts";
 import styles from "./home.module.scss";
