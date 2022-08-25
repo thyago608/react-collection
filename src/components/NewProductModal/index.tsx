@@ -2,19 +2,22 @@ import Modal from 'react-modal';
 import { FiX } from "react-icons/fi";
 import { Input } from 'components/Input';
 import styles from "./styles.module.scss";
+import { useModal } from 'hooks/useModal';
 
 export function NewProductModal() {
+    const { isOpen, handleCloseModal } = useModal();
+
     return (
         <Modal
-            isOpen={true}
-            onRequestClose={() => { }}
+            isOpen={isOpen}
+            onRequestClose={handleCloseModal}
             overlayClassName="react-modal-overlay"
             className="react-modal-content"
         >
             <button
                 type="button"
                 className="react-modal-close"
-                onClick={() => { }}
+                onClick={handleCloseModal}
             >
                 <FiX />
             </button>
