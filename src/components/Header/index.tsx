@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Input } from "components/Input";
+import { Search } from "components/Search";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 
@@ -12,7 +12,7 @@ export function Header() {
                         <Image src="/logo.png" alt="collection" layout="fill" />
                     </a>
                 </Link>
-                <Input />
+                <Search />
                 <button
                     type="button"
                     className={styles.buttonAddNewMaterial}
