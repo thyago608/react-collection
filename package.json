@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server": "json-server -p 3333 server.json -w"
+    "server": "json-server -p 3333 server.json -w --delay 750"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.2.1",
@@ -17,6 +17,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.4.0",
     "react-modal": "^3.15.1",
+    "react-toastify": "^9.0.8",
     "sass": "^1.54.5"
   },
   "devDependencies": {
