@@ -7,6 +7,7 @@ import { Header } from 'components/Header';
 import { NewProductModal } from 'components/NewProductModal';
 import { ModalProvider } from "contexts/ModalContext";
 import { queryClient } from 'services/queryClient';
+import "react-toastify/dist/ReactToastify.css";
 import "styles/global.scss";
 
 Modal.setAppElement("#__next");
