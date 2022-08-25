@@ -1,54 +1,15 @@
 .container {
-  width: 100%;
-  max-width: 600px;
-
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0.5rem;
 
   input {
-    flex: 1;
-
-    border: 0;
-    border-radius: 2.5rem;
-
-    height: 2.5rem;
+    height: 2.2rem;
     padding: 0 0.8rem;
 
-    background: #000;
-    color: #d2d2d2;
+    border: 1px solid rgba(#111, 0.25);
+    border-radius: 0.5rem;
 
-    &::placeholder {
-      font-size: 13px;
-    }
-  }
-
-  button {
-    width: 2rem;
-    height: 2rem;
-
-    border: 0;
-    border-radius: 2rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: transparent;
-
-    svg {
-      color: #fff;
-    }
-
-    &:hover {
-      opacity: 0.2;
-    }
-  }
-
-  @media (min-width: 768px) {
-    input {
-      font-size: 1rem;
-    }
+    font-size: 1rem;
   }
 }

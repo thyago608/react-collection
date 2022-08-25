@@ -1,16 +1,15 @@
-import { FiSearch, FiX } from "react-icons/fi";
+import { InputHTMLAttributes } from "react";
 import styles from "./styles.module.scss";
 
-export function Input() {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+    label: string;
+}
+
+export function Input({ label, name, ...rest }: InputProps) {
     return (
         <div className={styles.container}>
-            <input
-                type="text"
-                placeholder="Pesquise por descrição ou linha"
-            />
-            <button type="button">
-                <FiSearch />
-            </button>
+            <label htmlFor={name}>{label}</label>
+            <input id={name} {...rest} />
         </div>
     );
 }
