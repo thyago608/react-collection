@@ -9,7 +9,5 @@ async function getProducts() {
 }
 
 export function useProducts() {
-  return useQuery(["products"], getProducts, {
-    staleTime: 1000 * 60 * 5, // 5 minutes
-  });
+  return useQuery(["products"], getProducts);
 }

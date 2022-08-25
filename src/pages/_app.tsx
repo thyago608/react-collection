@@ -6,7 +6,7 @@ import { Footer } from 'components/Footer';
 import { Header } from 'components/Header';
 import { NewProductModal } from 'components/NewProductModal';
 import { ModalProvider } from "contexts/ModalContext";
-import { queryClient } from 'services/queryClient';
+import { client } from 'services/queryClient';
 import "react-toastify/dist/ReactToastify.css";
 import "styles/global.scss";
 
@@ -14,7 +14,7 @@ Modal.setAppElement("#__next");
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
-        <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={client}>
             <ModalProvider>
                 <Header />
                 <Component {...pageProps} />
