@@ -4,7 +4,9 @@
   width: 100%;
   max-width: 1200px;
   min-height: calc(100vh - 16rem);
+}
 
+.containerProducts {
   display: grid;
   justify-items: center;
   gap: 2rem;

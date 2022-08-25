@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["d1ptd3zs6hice0.cloudfront.net"],
+    domains: ["d1ptd3zs6hice0.cloudfront.net", "d3j9qmbv5hjp0y.cloudfront.net"],
   },
 };
 
