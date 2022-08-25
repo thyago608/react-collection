@@ -1,15 +1,15 @@
 import React from "react";
 import Head from "next/head";
 import { ToastContainer } from "react-toastify";
-import { toastError, toastSuccess } from "utils/toasts";
+import { toastError } from "utils/toasts";
 import { Product } from "components/Product";
 import { useProducts } from "hooks/useProducts";
 import styles from "./home.module.scss";
 
 export default function Home() {
-    const { data, isLoading, error } = useProducts();
+    const { users } = useProducts();
 
-    if (error) {
+    if (users.error) {
         toastError("Desculpe, não foi possível carregar os produtos");
     }
 
@@ -20,9 +20,9 @@ export default function Home() {
             </Head>
             <ToastContainer />
             <main className={styles.container}>
-                {isLoading ? <p>carregando...</p> :
+                {users.isLoading ? <p>carregando...</p> :
                     <section className={styles.containerProducts}>
-                        {data?.map(product => (
+                        {users.data?.map(product => (
                             <Product key={product.id} product={product} />
                         ))}
                     </section>

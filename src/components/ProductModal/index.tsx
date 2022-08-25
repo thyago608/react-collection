@@ -1,31 +1,26 @@
 import { useRef, FormEvent } from "react";
-import { client } from "services/queryClient";
-import { useMutation } from "@tanstack/react-query";
 import Modal from 'react-modal';
 import { FiX } from "react-icons/fi";
 import { Input } from 'components/Input';
 import { useModal } from 'hooks/useModal';
+import { useProducts } from "hooks/useProducts";
 import { validateFields } from "utils/validateFields";
-import { api } from "services/api";
-import { Product } from "types/Product";
 import styles from "./styles.module.scss";
 
-type CreateProductFormData = Omit<Product, "id">;
+type ModalInformation = {
+    title: string;
+    formSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    buttonLabelSubmit: string;
+}
 
-export function NewProductModal() {
-    const { isOpen, handleCloseModal } = useModal();
+export function ProductModal() {
+    const { isOpen, handleCloseModal, currentProduct } = useModal();
+    const { createNewProduct, updateProduct } = useProducts();
+
     const inputDescriptionRef = useRef<HTMLInputElement>(null);
     const inputLineRef = useRef<HTMLInputElement>(null);
 
-    const createProduct = useMutation(async (product: CreateProductFormData) => {
-        const response = await api.post('materials', product);
-
-        return response.data;
-    }, {
-        onSuccess: () => client.invalidateQueries(['products'])
-    });
-
-    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    async function handleCreateNewProduct(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         const inputDescription = inputDescriptionRef.current;
@@ -49,11 +44,45 @@ export function NewProductModal() {
                     status: 1,
                 }
 
-                await createProduct.mutateAsync(product);
+                await createNewProduct.mutateAsync(product);
                 handleCloseModal();
             }
         }
     }
+
+    async function handleUpdateProduct(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        const inputDescription = inputDescriptionRef.current;
+        const inputLine = inputLineRef.current;
+
+        if (inputDescription && inputLine) {
+            const isValid = validateFields(inputDescription) && validateFields(inputLine);
+
+            if (isValid) {
+                const product = {
+                    ...currentProduct,
+                    description: inputDescription.value,
+                    line: inputLine.value,
+                    created_at: new Date().toLocaleDateString('pt-br', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                    }),
+                }
+                await updateProduct.mutateAsync(product);
+                handleCloseModal();
+            }
+        }
+    }
+
+    const modalInformation = {
+        title: currentProduct.hasOwnProperty('id') ? 'Atualizar Material' : 'Cadastrar Material',
+        formSubmit: currentProduct.hasOwnProperty('id') ? handleUpdateProduct : handleCreateNewProduct,
+        buttonLabelSubmit: currentProduct.hasOwnProperty('id') ? 'Atualizar' : 'Cadastrar'
+    };
 
     return (
         <Modal
@@ -69,20 +98,24 @@ export function NewProductModal() {
             >
                 <FiX />
             </button>
-            <form onSubmit={handleSubmit} className={styles.form}>
-                <h2>Cadastrar Material</h2>
+            <form onSubmit={modalInformation.formSubmit} className={styles.form}>
+                <h2>{modalInformation.title}</h2>
                 <Input
                     label="Descrição"
                     name="descricao"
                     ref={inputDescriptionRef}
+                    placeholder={currentProduct?.description}
+                    required
                 />
                 <Input
                     label="Linha"
                     name="linha"
                     ref={inputLineRef}
+                    placeholder={currentProduct?.line}
+                    required
                 />
                 <button type="submit">
-                    Cadastrar
+                    {modalInformation.buttonLabelSubmit}
                 </button>
             </form>
         </Modal>

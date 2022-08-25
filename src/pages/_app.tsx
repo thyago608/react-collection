@@ -4,7 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Footer } from 'components/Footer';
 import { Header } from 'components/Header';
-import { NewProductModal } from 'components/NewProductModal';
+import { ProductModal } from 'components/ProductModal';
 import { ModalProvider } from "contexts/ModalContext";
 import { client } from 'services/queryClient';
 import "react-toastify/dist/ReactToastify.css";
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <Header />
                 <Component {...pageProps} />
                 <Footer />
-                <NewProductModal />
+                <ProductModal />
             </ModalProvider>
             <ReactQueryDevtools />
         </QueryClientProvider>

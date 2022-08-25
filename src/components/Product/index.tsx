@@ -1,22 +1,22 @@
 import Image from "next/image";
-import { useMutation } from "@tanstack/react-query";
 import { FiTool, FiTrash2 } from "react-icons/fi";
+import { useProducts } from "hooks/useProducts";
 import { Product as IProduct } from "types/Product";
 import styles from "./styles.module.scss";
-import { client } from "services/queryClient";
-import { api } from "services/api";
+import { useModal } from "hooks/useModal";
 
 interface ProductProps {
     product: IProduct;
 }
 
 export function Product({ product }: ProductProps) {
-    const deleteProduct = useMutation(async (productID: number) =>
-        await api.delete(`materials/${productID}`),
-        {
-            onSuccess: () => client.invalidateQueries(['products'])
-        }
-    );
+    const { removeProduct } = useProducts();
+    const { handleOpenModal, handleCurrentProduct, currentProduct } = useModal();
+
+    function OpenModal() {
+        handleCurrentProduct(product);
+        handleOpenModal();
+    }
 
     return (
         <div className={styles.container}>
@@ -28,10 +28,18 @@ export function Product({ product }: ProductProps) {
                 <strong className={styles.line}>{product.line}</strong>
             </div>
             <div className={styles.actions}>
-                <button type="button" className={styles.tool}>
+                <button
+                    type="button"
+                    className={styles.tool}
+                    onClick={OpenModal}
+                >
                     <FiTool />
                 </button>
-                <button type="button" className={styles.trash} onClick={() => deleteProduct.mutateAsync(product.id)}>
+                <button
+                    type="button"
+                    className={styles.trash}
+                    onClick={() => removeProduct.mutateAsync(product.id)}
+                >
                     <FiTrash2 />
                 </button>
             </div>
