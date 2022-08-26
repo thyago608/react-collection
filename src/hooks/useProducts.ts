@@ -1,4 +1,4 @@
-import { useMutation, UseQueryOptions } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { CreateProductFormData, UpdateProductFormData } from "types/Product";
 import { api } from "services/api";
 import { client } from "services/queryClient";
@@ -15,7 +15,7 @@ async function updateProduct(product: UpdateProductFormData) {
   await api.put(`materials/${product.id}`, product);
 }
 
-export function useProducts(options?: UseQueryOptions) {
+export function useProducts() {
   return {
     createNewProduct: useMutation(createProduct, {
       onSuccess: () => client.invalidateQueries(["products"]),
