@@ -5,10 +5,10 @@
   justify-content: center;
   align-items: center;
 
-  background: #001011;
+  background: var(--black-600);
 
   p {
-    color: #d2d2d2;
+    color: var(--gray-100);
     text-align: center;
   }
 }

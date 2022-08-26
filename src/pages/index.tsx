@@ -1,13 +1,21 @@
 import React from "react";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { ToastContainer } from "react-toastify";
 import { toastError } from "utils/toasts";
 import { Product } from "components/Product";
-import { useProducts } from "hooks/useProducts";
+import { IProduct } from "types/Product";
+import { getProducts, useProducts } from "hooks/useProducts";
 import styles from "./home.module.scss";
 
-export default function Home() {
-    const { users } = useProducts();
+interface HomeProps {
+    products: IProduct;
+}
+
+export default function Home({ products }: HomeProps) {
+    const { users } = useProducts({
+        initialData: products
+    });
 
     if (users.error) {
         toastError("Desculpe, não foi possível carregar os produtos");
@@ -30,4 +38,15 @@ export default function Home() {
             </main>
         </>
     );
+}
+
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    const products = await getProducts();
+
+    return {
+        props: {
+            products
+        }
+    }
 }

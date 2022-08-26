@@ -1,4 +1,4 @@
-export interface Product {
+export interface IProduct {
   id: number;
   description: string;
   url_thumbnail: string;
@@ -6,3 +6,7 @@ export interface Product {
   status: number;
   created_at: string;
 }
+
+export type CreateProductFormData = Omit<IProduct, "id">;
+
+export type UpdateProductFormData = Omit<IProduct, "url_thumbnail" | "status">;

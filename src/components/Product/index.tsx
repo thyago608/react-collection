@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FiTool, FiTrash2 } from "react-icons/fi";
 import { useProducts } from "hooks/useProducts";
-import { Product as IProduct } from "types/Product";
+import { IProduct } from "types/Product";
 import styles from "./styles.module.scss";
 import { useModal } from "hooks/useModal";
 
@@ -11,7 +11,7 @@ interface ProductProps {
 
 export function Product({ product }: ProductProps) {
     const { removeProduct } = useProducts();
-    const { handleOpenModal, handleCurrentProduct, currentProduct } = useModal();
+    const { handleOpenModal, handleCurrentProduct } = useModal();
 
     function OpenModal() {
         handleCurrentProduct(product);
@@ -26,6 +26,7 @@ export function Product({ product }: ProductProps) {
             <div className={styles.text}>
                 <p className={styles.description}>{product.description}</p>
                 <strong className={styles.line}>{product.line}</strong>
+                <span>{product.created_at}</span>
             </div>
             <div className={styles.actions}>
                 <button

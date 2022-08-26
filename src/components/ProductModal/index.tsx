@@ -7,12 +7,6 @@ import { useProducts } from "hooks/useProducts";
 import { validateFields } from "utils/validateFields";
 import styles from "./styles.module.scss";
 
-type ModalInformation = {
-    title: string;
-    formSubmit: (event: FormEvent<HTMLFormElement>) => void;
-    buttonLabelSubmit: string;
-}
-
 export function ProductModal() {
     const { isOpen, handleCloseModal, currentProduct } = useModal();
     const { createNewProduct, updateProduct } = useProducts();
@@ -78,11 +72,18 @@ export function ProductModal() {
         }
     }
 
-    const modalInformation = {
-        title: currentProduct.hasOwnProperty('id') ? 'Atualizar Material' : 'Cadastrar Material',
-        formSubmit: currentProduct.hasOwnProperty('id') ? handleUpdateProduct : handleCreateNewProduct,
-        buttonLabelSubmit: currentProduct.hasOwnProperty('id') ? 'Atualizar' : 'Cadastrar'
-    };
+    const modalType = currentProduct.hasOwnProperty('id') ?
+        {
+            title: 'Atualizar Material',
+            formSubmit: handleUpdateProduct,
+            buttonLabelSubmit: 'Atualizar'
+        } :
+        {
+            title: 'Cadastrar Material',
+            formSubmit: handleCreateNewProduct,
+            buttonLabelSubmit: 'Cadastrar'
+        }
+
 
     return (
         <Modal
@@ -98,8 +99,8 @@ export function ProductModal() {
             >
                 <FiX />
             </button>
-            <form onSubmit={modalInformation.formSubmit} className={styles.form}>
-                <h2>{modalInformation.title}</h2>
+            <form onSubmit={modalType.formSubmit} className={styles.form}>
+                <h2>{modalType.title}</h2>
                 <Input
                     label="Descrição"
                     name="descricao"
@@ -115,7 +116,7 @@ export function ProductModal() {
                     required
                 />
                 <button type="submit">
-                    {modalInformation.buttonLabelSubmit}
+                    {modalType.buttonLabelSubmit}
                 </button>
             </form>
         </Modal>

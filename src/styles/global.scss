@@ -4,8 +4,20 @@
   box-sizing: border-box;
 }
 
+:root {
+  --gray-50: #f4f2f3;
+  --gray-100: #d2d2d2;
+  --gray-500: #333;
+  --black-600: #001011;
+  --black-700: #000;
+  --yellow-700: #ffc400;
+  --green-400: #33cc95;
+  --red-400: #e52e54;
+  --white: #fff;
+}
+
 body {
-  background: #f4f2f3;
+  background: var(--gray-50);
 }
 
 body,
@@ -42,7 +54,7 @@ a {
   width: 100%;
   max-width: 576px;
 
-  background: #fff;
+  background: var(--white);
   padding: 3rem;
   border-radius: 0.25rem;
 
@@ -58,6 +70,10 @@ a {
 
   background: transparent;
   transition: filter 0.2s;
+
+  svg {
+    font-size: 1rem;
+  }
 
   &:hover {
     filter: brightness(0.8);
