@@ -5,12 +5,13 @@ import { IProduct } from "types/Product";
 import { useModal } from "hooks/useModal";
 import styles from "./styles.module.scss";
 import { toastSuccess } from "utils/toasts";
+import { memo } from "react";
 
 interface ProductProps {
     product: IProduct;
 }
 
-export function Product({ product }: ProductProps) {
+function ProductComponent({ product }: ProductProps) {
     const { removeProduct } = useProducts();
     const { handleOpenModal, handleCurrentProduct } = useModal();
 
@@ -58,3 +59,8 @@ export function Product({ product }: ProductProps) {
         </div>
     );
 }
+
+
+export const Product = memo(ProductComponent, (prevProps, nextProps) => {
+    return Object.is(prevProps.product, nextProps.product)
+});
