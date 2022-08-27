@@ -1,44 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import { IProduct } from "types/Product";
 import { api } from "services/api";
-import {
-  useQuery,
-  UseQueryResult,
-  UseQueryOptions,
-} from "@tanstack/react-query";
+import { handleCreateAt } from "utils/convertDate";
 
 const LIMIT = 10;
 
 type ResponseFetchProducts = {
   products: IProduct[];
-  currentPage: number;
-  prevPage: number;
-  nextPage: number;
+  pages: {
+    currentPage: number;
+    prevPage: number;
+    nextPage: number;
+    totalPages: number;
+  };
 };
 
-function sortProducts(products: IProduct[]) {
-  return products.sort(function (a, b) {
-    if (a.id < b.id) {
-      return 1;
-    }
-    if (a.id > b.id) {
-      return -1;
-    }
-
-    return 0;
-  });
-}
-
-function formatProducts(products: IProduct[]) {
+export function formatProducts(products: IProduct[]) {
   return products.map((product) => {
     return {
       ...product,
-      created_at: new Intl.DateTimeFormat("pt-BR", {
-        year: "2-digit",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-      }).format(new Date(product.created_at)),
+      created_at: handleCreateAt(product.created_at),
     };
   });
 }
@@ -49,9 +30,10 @@ export async function getProducts(
   let currentPage = page;
 
   let response = await api.get<IProduct[]>(
-    `materials?_page=${currentPage}&_limit=${LIMIT}`
+    `materials?_page=${currentPage}&_limit=${LIMIT}&_sort=id&_order=desc`
   );
   const totalProducts = Number(response.headers["x-total-count"]);
+  const totalPages = totalProducts / LIMIT;
 
   let prevPage = currentPage === 1 ? 1 : currentPage - 1;
   let nextPage =
@@ -65,15 +47,17 @@ export async function getProducts(
 
   const formattedProducts = formatProducts(response.data);
 
-  const orderedProducts = sortProducts(formattedProducts);
-
-  return { products: orderedProducts, currentPage, prevPage, nextPage };
+  return {
+    products: formattedProducts,
+    pages: { currentPage, prevPage, nextPage, totalPages },
+  };
 }
 
-export function useFetchProducts(page: number, options: UseQueryOptions) {
-  return useQuery({
-    queryKey: ["products", page],
-    queryFn: () => getProducts(page),
-    ...options,
-  }) as UseQueryResult<ResponseFetchProducts>;
+export function useFetchProducts(
+  page: number,
+  dataInitial?: ResponseFetchProducts
+) {
+  return useQuery(["products", page], () => getProducts(page), {
+    initialData: dataInitial,
+  });
 }

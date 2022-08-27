@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { ProductContext } from "contexts/ProductsContext";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { ToastContainer } from "react-toastify";
@@ -11,17 +12,28 @@ import { getProducts, useFetchProducts } from "hooks/useFetchProducts";
 import styles from "./home.module.scss";
 
 interface HomeProps {
-    products: IProduct;
-    currentPage: number;
-    prevPage: number;
-    nextPage: number;
+    products: IProduct[];
+    pages: {
+        currentPage: number;
+        prevPage: number;
+        nextPage: number;
+        totalPages: number;
+    }
 }
 
-export default function Home({ products, currentPage, prevPage, nextPage }: HomeProps) {
-    const [page, setPage] = useState(currentPage);
+export default function Home({ products, pages }: HomeProps) {
+    const [page, setPage] = useState(pages.currentPage);
     const { data, error, isLoading } = useFetchProducts(page, {
-        initialData: { products, currentPage, prevPage, nextPage },
+        products,
+        pages: {
+            currentPage: pages.currentPage,
+            nextPage: pages.nextPage,
+            prevPage: pages.prevPage,
+            totalPages: pages.totalPages,
+        }
     });
+
+    const { products: productsState } = useContext(ProductContext);
 
     if (error) {
         toastError("Desculpe, não foi possível carregar os produtos");
@@ -35,7 +47,7 @@ export default function Home({ products, currentPage, prevPage, nextPage }: Home
     }
 
     function handleNextPage() {
-        if (page === data?.nextPage) {
+        if (page === data?.pages.nextPage) {
             return;
         }
         setPage(page + 1);
@@ -50,24 +62,31 @@ export default function Home({ products, currentPage, prevPage, nextPage }: Home
             <main className={styles.container}>
                 {isLoading ? <p>carregando...</p> :
                     <section className={styles.containerProducts}>
-                        {data?.products.map(product => (
+                        {productsState.length === 0 ? data?.products.map(product => (
                             <Product key={product.id} product={product} />
-                        ))}
+                        )) :
+                            (productsState.map(product => (
+                                <Product key={product.id} product={product} />
+                            )))}
                     </section>
                 }
-                <nav className={styles.navigation}>
-                    <Button
-                        onClick={handlePrevPage}
-                        text="Anterior"
-                        icon={<FiArrowLeft />}
-                    />
-                    <Button
-                        onClick={handleNextPage}
-                        text="Próximo"
-                        icon={<FiArrowRight />}
-                        position="right"
-                    />
-                </nav>
+                {productsState.length === 0 &&
+                    <nav className={styles.navigation}>
+                        <Button
+                            onClick={handlePrevPage}
+                            text="Anterior"
+                            icon={<FiArrowLeft />}
+                            disabled={page === 1}
+                        />
+                        <Button
+                            onClick={handleNextPage}
+                            text="Próximo"
+                            icon={<FiArrowRight />}
+                            position="right"
+                            disabled={page === data?.pages.totalPages}
+                        />
+                    </nav>
+                }
             </main>
         </>
     );

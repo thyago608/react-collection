@@ -1,18 +1,36 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { CreateProductFormData, UpdateProductFormData } from "types/Product";
 import { api } from "services/api";
 import { client } from "services/queryClient";
 
 async function createProduct(product: CreateProductFormData) {
-  await api.post("materials", product);
+  try {
+    await api.post("materials", product);
+  } catch (e) {
+    console.log(
+      "Desculpe, não foi possível estabelecer conexão com o servidor"
+    );
+  }
 }
 
 async function removeProduct(productID: number) {
-  await api.delete(`materials/${productID}`);
+  try {
+    await api.delete(`materials/${productID}`);
+  } catch (e) {
+    console.log(
+      "Desculpe, não foi possível estabelecer conexão com o servidor"
+    );
+  }
 }
 
 async function updateProduct(product: UpdateProductFormData) {
-  await api.put(`materials/${product.id}`, product);
+  try {
+    await api.put(`materials/${product.id}`, product);
+  } catch (e) {
+    console.log(
+      "Desculpe, não foi possível estabelecer conexão com o servidor"
+    );
+  }
 }
 
 export function useProducts() {

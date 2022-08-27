@@ -21,29 +21,16 @@ export function ProductModal() {
         const inputLine = inputLineRef.current;
 
         if (inputDescription && inputLine) {
-            const isValid = validateFields(inputDescription) && validateFields(inputLine);
+            const product = {
+                description: inputDescription.value,
+                line: inputLine.value,
+                created_at: new Date().toISOString(),
+                url_thumbnail: "https://d1ptd3zs6hice0.cloudfront.net/Materiais/Porcelanato/Damme/Damme_MagdalIcePR83185_83x83_Ace_Stack_thumb.jpg",
+                status: 1,
+            }
 
-            // if (isValid) {
-            //     const product = {
-            //         description: inputDescription.value,
-            //         line: inputLine.value,
-            //         created_at: new Date().toLocaleDateString('pt-br', {
-            //             day: '2-digit',
-            //             month: '2-digit',
-            //             year: '2-digit',
-            //             hour: '2-digit',
-            //             minute: '2-digit',
-            //         }),
-            //         url_thumbnail: "https://d1ptd3zs6hice0.cloudfront.net/Materiais/Porcelanato/Damme/Damme_MagdalIcePR83185_83x83_Ace_Stack_thumb.jpg",
-            //         status: 1,
-            //     }
-
-            //     await createNewProduct.mutateAsync(product);
-            //     handleCloseModal();
-
-            console.log(new Date().toLocaleDateString('pt-br', {
-                timeZoneName: 'long'
-            }))
+            await createNewProduct.mutateAsync(product);
+            handleCloseModal();
         }
     }
 
@@ -54,24 +41,15 @@ export function ProductModal() {
         const inputLine = inputLineRef.current;
 
         if (inputDescription && inputLine) {
-            const isValid = validateFields(inputDescription) && validateFields(inputLine);
-
-            if (isValid) {
-                const product = {
-                    ...currentProduct,
-                    description: inputDescription.value,
-                    line: inputLine.value,
-                    created_at: new Date().toLocaleDateString('pt-br', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                    }),
-                }
-                await updateProduct.mutateAsync(product);
-                handleCloseModal();
+            const product = {
+                ...currentProduct,
+                description: inputDescription.value,
+                line: inputLine.value,
+                created_at: new Date().toISOString()
             }
+
+            await updateProduct.mutateAsync(product);
+            handleCloseModal();
         }
     }
 

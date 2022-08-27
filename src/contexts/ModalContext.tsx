@@ -1,12 +1,12 @@
 import { useState, createContext, ReactNode } from "react";
-import { Product } from "types/Product";
+import { IProduct } from "types/Product";
 
 interface ModalContextData {
     isOpen: boolean;
     handleOpenModal: () => void;
     handleCloseModal: () => void;
-    currentProduct: Product;
-    handleCurrentProduct: (product: Product) => void;
+    currentProduct: IProduct;
+    handleCurrentProduct: (product: IProduct) => void;
 }
 
 interface ModalProviderProps {
@@ -17,7 +17,7 @@ export const ModalContext = createContext<ModalContextData>({} as ModalContextDa
 
 export function ModalProvider({ children }: ModalProviderProps) {
     const [isOpen, setIsOpen] = useState(false);
-    const [currentProduct, setCurrentProduct] = useState<Product>({} as Product);
+    const [currentProduct, setCurrentProduct] = useState<IProduct>({} as IProduct);
 
     function handleOpenModal() {
         setIsOpen(true);
@@ -25,10 +25,10 @@ export function ModalProvider({ children }: ModalProviderProps) {
 
     function handleCloseModal() {
         setIsOpen(false);
-        setCurrentProduct({} as Product);
+        setCurrentProduct({} as IProduct);
     }
 
-    function handleCurrentProduct(current: Product) {
+    function handleCurrentProduct(current: IProduct) {
         setCurrentProduct(current);
     }
 

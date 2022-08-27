@@ -1,31 +1,48 @@
-import { FormEvent, useRef } from "react";
+import { FormEvent, useContext, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IProduct } from "types/Product";
-import styles from "./styles.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "services/api";
+import { ProductContext } from "contexts/ProductsContext";
+import { formatProducts } from "hooks/useFetchProducts";
+import styles from "./styles.module.scss";
 
 export function Search() {
-    const searchInputRef = useRef<HTMLInputElement>(null);
+    const [search, setSearch] = useState('');
+    const { handleAddProducts } = useContext(ProductContext);
 
-    async function getProductByText(): Promise<IProduct | undefined> {
+    async function getProductByText(): Promise<IProduct[]> {
         try {
-            const input = searchInputRef.current;
-
-            if (input) {
-                const response = await api.get<IProduct>(`materials?q=${input.value}`);
-                return response.data;
-            }
-        } catch (e) {
-            console.log("Desculpe mas não encontramos a descrição solicitada")
+            const response = await api.get(`materials?q=${search}`);
+            return response.data;
+        } catch {
+            console.log("Desculpe, mas não achamos o produto pesquisado")
         }
+        return [];
     }
 
-    const { data, refetch } = useQuery(["product"], getProductByText, { enabled: false });
+    const { refetch } = useQuery(["product"], getProductByText, {
+        enabled: false,
+        onSuccess: (data) => {
+            if (data) {
+                const productsFormatted = formatProducts(data);
+                handleAddProducts(productsFormatted);
+            }
+        },
+    });
 
     async function handleSearchProducts(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        await refetch();
+        await refetch({ cancelRefetch: true, throwOnError: false });
+    }
+
+
+    function handleValueInputSearch(search: string) {
+        setSearch(search);
+
+        if (search.length === 0) {
+            handleAddProducts([]);
+        }
     }
 
     return (
@@ -33,7 +50,8 @@ export function Search() {
             <input
                 type="text"
                 placeholder="Pesquise por descrição ou linha"
-                ref={searchInputRef}
+                value={search}
+                onChange={e => handleValueInputSearch(e.target.value)}
                 required
             />
             <button type="submit">

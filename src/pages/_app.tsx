@@ -9,6 +9,7 @@ import { ModalProvider } from "contexts/ModalContext";
 import { client } from 'services/queryClient';
 import "react-toastify/dist/ReactToastify.css";
 import "styles/global.scss";
+import { ProductProvider } from 'contexts/ProductsContext';
 
 Modal.setAppElement("#__next");
 
@@ -16,10 +17,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <QueryClientProvider client={client}>
             <ModalProvider>
-                <Header />
-                <Component {...pageProps} />
-                <Footer />
-                <ProductModal />
+                <ProductProvider>
+                    <Header />
+                    <Component {...pageProps} />
+                    <Footer />
+                    <ProductModal />
+                </ProductProvider>
             </ModalProvider>
             <ReactQueryDevtools />
         </QueryClientProvider>

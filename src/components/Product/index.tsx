@@ -2,8 +2,8 @@ import Image from "next/image";
 import { FiTool, FiTrash2 } from "react-icons/fi";
 import { useProducts } from "hooks/useProducts";
 import { IProduct } from "types/Product";
-import styles from "./styles.module.scss";
 import { useModal } from "hooks/useModal";
+import styles from "./styles.module.scss";
 
 interface ProductProps {
     product: IProduct;
