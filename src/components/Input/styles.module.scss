@@ -3,6 +3,10 @@
   flex-direction: column;
   gap: 0.5rem;
 
+  label {
+    font-size: 0.9rem;
+  }
+
   input {
     height: 2.2rem;
     padding: 0 0.8rem;
@@ -10,7 +14,7 @@
     border: 1px solid rgba(#111, 0.25);
     border-radius: 0.5rem;
 
-    font-size: 1rem;
+    font-size: 0.9rem;
 
     outline: 2px solid var(--white);
     transition: outline-color 0.3s ease;

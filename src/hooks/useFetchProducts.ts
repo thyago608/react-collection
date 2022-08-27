@@ -1,8 +1,4 @@
-import {
-  useQuery,
-  UseQueryOptions,
-  UseQueryResult,
-} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { IProduct } from "types/Product";
 import { api } from "services/api";
 import { handleCreateAt } from "utils/convertDate";
@@ -40,10 +36,8 @@ export async function getProducts(
   };
 }
 
-export function useFetchProducts(page: number, options: UseQueryOptions) {
-  return useQuery({
-    queryKey: ["products", page],
-    queryFn: async () => await getProducts(page),
-    ...options,
-  }) as UseQueryResult<ResponseFetchProducts>;
+export function useFetchProducts(page: number) {
+  return useQuery(["products", page], async () => await getProducts(page), {
+    staleTime: 1000 * 60 * 5,
+  });
 }

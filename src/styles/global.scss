@@ -55,10 +55,14 @@ a {
   max-width: 576px;
 
   background: var(--white);
-  padding: 3rem;
+  padding: 1.3rem;
   border-radius: 0.25rem;
 
   position: relative;
+
+  @media (min-width: 768px) {
+    padding: 3rem;
+  }
 }
 
 .react-modal-close {

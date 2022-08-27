@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { ToastContainer } from 'react-toastify';
 import { ProductContext } from "contexts/ProductsContext";
@@ -7,21 +6,12 @@ import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { toastError } from "utils/toasts";
 import { Product } from "components/Product";
 import { Button } from "components/Button";
-import { IProduct } from "types/Product";
-import { getProducts, useFetchProducts } from "hooks/useFetchProducts";
+import { useFetchProducts } from "hooks/useFetchProducts";
 import styles from "./home.module.scss";
 
-interface HomeProps {
-    products: IProduct[];
-    totalPages: number;
-}
-
-export default function Home({ products, totalPages }: HomeProps) {
+export default function Home() {
     const [page, setPage] = useState(1);
-    const { data, error, isLoading } = useFetchProducts(page, {
-        initialData: { products, totalPages },
-        refetchOnMount: false,
-    });
+    const { data, error, isLoading } = useFetchProducts(page);
 
     const { products: productsContext } = useContext(ProductContext);
 
@@ -59,19 +49,11 @@ export default function Home({ products, totalPages }: HomeProps) {
                             text="Próximo"
                             icon={<FiArrowRight />}
                             position="right"
-                            disabled={page === totalPages}
+                            disabled={page === data?.totalPages}
                         />
                     </nav>
                 }
             </main>
         </>
     );
-}
-
-export const getServerSideProps: GetServerSideProps = async () => {
-    const response = await getProducts(1);
-
-    return {
-        props: response
-    }
 }

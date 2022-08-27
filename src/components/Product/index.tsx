@@ -19,8 +19,8 @@ export function Product({ product }: ProductProps) {
         handleOpenModal();
     }
 
-    function handleDeleteProduct() {
-        removeProduct.mutateAsync(product.id);
+    async function handleDeleteProduct() {
+        await removeProduct.mutateAsync(product.id);
         toastSuccess('Produto Excluído com sucesso!');
     }
 
