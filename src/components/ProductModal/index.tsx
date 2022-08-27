@@ -6,6 +6,7 @@ import { useModal } from 'hooks/useModal';
 import { useProducts } from "hooks/useProducts";
 import { validateFields } from "utils/validateFields";
 import styles from "./styles.module.scss";
+import { toastSuccess, toastInfo } from "utils/toasts";
 
 export function ProductModal() {
     const { isOpen, handleCloseModal, currentProduct } = useModal();
@@ -31,6 +32,7 @@ export function ProductModal() {
 
             await createNewProduct.mutateAsync(product);
             handleCloseModal();
+            toastSuccess('Produto Cadastrado com sucesso!');
         }
     }
 
@@ -50,6 +52,7 @@ export function ProductModal() {
 
             await updateProduct.mutateAsync(product);
             handleCloseModal();
+            toastInfo('Produto Atualizado!');
         }
     }
 

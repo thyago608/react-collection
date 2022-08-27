@@ -4,6 +4,7 @@ import { useProducts } from "hooks/useProducts";
 import { IProduct } from "types/Product";
 import { useModal } from "hooks/useModal";
 import styles from "./styles.module.scss";
+import { toastSuccess } from "utils/toasts";
 
 interface ProductProps {
     product: IProduct;
@@ -18,10 +19,19 @@ export function Product({ product }: ProductProps) {
         handleOpenModal();
     }
 
+    function handleDeleteProduct() {
+        removeProduct.mutateAsync(product.id);
+        toastSuccess('Produto Excluído com sucesso!');
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.image}>
-                <Image src={product.url_thumbnail} alt={product.description} layout="fill" />
+                <Image
+                    src={product.url_thumbnail}
+                    alt={product.description}
+                    layout="fill"
+                />
             </div>
             <div className={styles.text}>
                 <p className={styles.description}>{product.description}</p>
@@ -39,7 +49,7 @@ export function Product({ product }: ProductProps) {
                 <button
                     type="button"
                     className={styles.trash}
-                    onClick={() => removeProduct.mutateAsync(product.id)}
+                    onClick={handleDeleteProduct}
                 >
                     <FiTrash2 />
                 </button>

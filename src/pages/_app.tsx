@@ -6,10 +6,10 @@ import { Footer } from 'components/Footer';
 import { Header } from 'components/Header';
 import { ProductModal } from 'components/ProductModal';
 import { ModalProvider } from "contexts/ModalContext";
+import { ProductProvider } from 'contexts/ProductsContext';
 import { client } from 'services/queryClient';
 import "react-toastify/dist/ReactToastify.css";
 import "styles/global.scss";
-import { ProductProvider } from 'contexts/ProductsContext';
 
 Modal.setAppElement("#__next");
 

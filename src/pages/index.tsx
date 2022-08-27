@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { ProductContext } from "contexts/ProductsContext";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
+import { ProductContext } from "contexts/ProductsContext";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { toastError } from "utils/toasts";
 import { Product } from "components/Product";
@@ -58,8 +58,8 @@ export default function Home({ products, pages }: HomeProps) {
             <Head>
                 <title>React Collection | Home</title>
             </Head>
-            <ToastContainer />
             <main className={styles.container}>
+                <ToastContainer />
                 {isLoading ? <p>carregando...</p> :
                     <section className={styles.containerProducts}>
                         {productsState.length === 0 ? data?.products.map(product => (
