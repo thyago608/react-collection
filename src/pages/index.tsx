@@ -13,44 +13,20 @@ import styles from "./home.module.scss";
 
 interface HomeProps {
     products: IProduct[];
-    pages: {
-        currentPage: number;
-        prevPage: number;
-        nextPage: number;
-        totalPages: number;
-    }
+    totalPages: number;
 }
 
-export default function Home({ products, pages }: HomeProps) {
-    const [page, setPage] = useState(pages.currentPage);
+export default function Home({ products, totalPages }: HomeProps) {
+    const [page, setPage] = useState(1);
     const { data, error, isLoading } = useFetchProducts(page, {
-        products,
-        pages: {
-            currentPage: pages.currentPage,
-            nextPage: pages.nextPage,
-            prevPage: pages.prevPage,
-            totalPages: pages.totalPages,
-        }
+        initialData: { products, totalPages },
+        refetchOnMount: false,
     });
 
-    const { products: productsState } = useContext(ProductContext);
+    const { products: productsContext } = useContext(ProductContext);
 
     if (error) {
         toastError("Desculpe, não foi possível carregar os produtos");
-    }
-
-    function handlePrevPage() {
-        if (page === 1) {
-            return;
-        }
-        setPage(page - 1);
-    }
-
-    function handleNextPage() {
-        if (page === data?.pages.nextPage) {
-            return;
-        }
-        setPage(page + 1);
     }
 
     return (
@@ -62,28 +38,28 @@ export default function Home({ products, pages }: HomeProps) {
                 <ToastContainer />
                 {isLoading ? <p>carregando...</p> :
                     <section className={styles.containerProducts}>
-                        {productsState.length === 0 ? data?.products.map(product => (
+                        {productsContext.length === 0 ? data?.products.map(product => (
                             <Product key={product.id} product={product} />
                         )) :
-                            (productsState.map(product => (
+                            (productsContext.map(product => (
                                 <Product key={product.id} product={product} />
                             )))}
                     </section>
                 }
-                {productsState.length === 0 &&
+                {productsContext.length === 0 &&
                     <nav className={styles.navigation}>
                         <Button
-                            onClick={handlePrevPage}
+                            onClick={() => setPage(page - 1)}
                             text="Anterior"
                             icon={<FiArrowLeft />}
                             disabled={page === 1}
                         />
                         <Button
-                            onClick={handleNextPage}
+                            onClick={() => setPage(page + 1)}
                             text="Próximo"
                             icon={<FiArrowRight />}
                             position="right"
-                            disabled={page === data?.pages.totalPages}
+                            disabled={page === totalPages}
                         />
                     </nav>
                 }
