@@ -14,11 +14,15 @@
   justify-content: space-between;
 
   .buttonAddNewMaterial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
     border: 0;
     border-radius: 0.2rem;
 
     padding: 0 0.8rem;
-    height: 2.5rem;
+    height: 2.35rem;
 
     background: rgba(#ffc400, 0.85);
     transition: filter 0.3s ease;

@@ -1,17 +1,15 @@
-import { InputHTMLAttributes, forwardRef, ForwardRefRenderFunction } from "react";
+import { InputHTMLAttributes } from "react";
 import styles from "./styles.module.scss";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
 }
 
-const InputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({ label, name, ...rest }, ref) => {
+export function Input({ label, name, ...rest }: InputProps) {
     return (
         <div className={styles.container}>
             <label htmlFor={name}>{label}</label>
-            <input id={name} {...rest} ref={ref} />
+            <input id={name} {...rest} />
         </div>
     );
 }
-
-export const Input = forwardRef(InputBase);
