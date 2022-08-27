@@ -1,15 +1,15 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { IProduct } from "types/Product";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "services/api";
-import { ProductContext } from "contexts/ProductsContext";
+import { useProductsSearch } from "hooks/useProductsSearch";
 import { formatProducts } from "hooks/useFetchProducts";
 import styles from "./styles.module.scss";
 
 export function Search() {
     const [search, setSearch] = useState('');
-    const { handleAddProducts } = useContext(ProductContext);
+    const { handleAddProducts } = useProductsSearch();
 
     async function getProductByText(): Promise<IProduct[]> {
         try {
@@ -31,18 +31,17 @@ export function Search() {
         },
     });
 
-    async function handleSearchProducts(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        await refetch({ cancelRefetch: true, throwOnError: false });
-    }
-
-
     function handleValueInputSearch(search: string) {
         setSearch(search);
 
         if (search.length === 0) {
             handleAddProducts([]);
         }
+    }
+
+    async function handleSearchProducts(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        await refetch({ cancelRefetch: true, throwOnError: false });
     }
 
     return (

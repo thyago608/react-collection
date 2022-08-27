@@ -1,3 +1,12 @@
+@keyframes animationTransform {
+  to {
+    transform: translateX(0);
+  }
+  from {
+    transform: translateX(-400px);
+  }
+}
+
 .container {
   background: var(--white);
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.135216);
@@ -12,6 +21,7 @@
   gap: 1rem;
 
   padding: 1rem;
+  animation: animationTransform 0.3s backwards;
 
   .image {
     position: relative;

@@ -234,35 +234,11 @@
     },
     {
       "id": 14575,
-      "description": "Silex Cinza Po",
-      "url_thumbnail": "https://d1ptd3zs6hice0.cloudfront.net/Materiais/Porcelanato/Eliane/Eliane_SilexCinzaPo_60x120_Pol_Stack_thumb.jpg",
+      "description": "Silex Branco Po",
+      "url_thumbnail": "https://d1ptd3zs6hice0.cloudfront.net/Materiais/Porcelanato/Eliane/Eliane_SilexBrancoPo_60x120_Pol_Stack_thumb.jpg",
       "line": "Silex",
       "status": 1,
-      "created_at": "2021-05-20T18:07:47.000Z"
-    },
-    {
-      "description": "aaaaaaa",
-      "line": "aaaaaaaa",
-      "created_at": "2022-08-27T00:53:44.098Z",
-      "url_thumbnail": "https://d1ptd3zs6hice0.cloudfront.net/Materiais/Porcelanato/Damme/Damme_MagdalIcePR83185_83x83_Ace_Stack_thumb.jpg",
-      "status": 1,
-      "id": 14576
-    },
-    {
-      "description": "tttttttttttt",
-      "line": "tttttttttttttttttttt",
-      "created_at": "2022-08-27T00:58:25.471Z",
-      "url_thumbnail": "https://d1ptd3zs6hice0.cloudfront.net/Materiais/Porcelanato/Damme/Damme_MagdalIcePR83185_83x83_Ace_Stack_thumb.jpg",
-      "status": 1,
-      "id": 14577
-    },
-    {
-      "description": "8888888888",
-      "line": "88888888888888888",
-      "created_at": "2022-08-27T01:06:00.888Z",
-      "url_thumbnail": "https://d1ptd3zs6hice0.cloudfront.net/Materiais/Porcelanato/Damme/Damme_MagdalIcePR83185_83x83_Ace_Stack_thumb.jpg",
-      "status": 1,
-      "id": 14578
+      "created_at": "2021-05-20T18:02:29.000Z"
     }
   ]
 }

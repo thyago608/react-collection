@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FiTool, FiTrash2 } from "react-icons/fi";
+import { FiTrash2, FiEdit2 } from "react-icons/fi";
 import { useProducts } from "hooks/useProducts";
 import { IProduct } from "types/Product";
 import { useModal } from "hooks/useModal";
@@ -31,6 +31,7 @@ export function Product({ product }: ProductProps) {
                     src={product.url_thumbnail}
                     alt={product.description}
                     layout="fill"
+                    loading="eager"
                 />
             </div>
             <div className={styles.text}>
@@ -44,7 +45,7 @@ export function Product({ product }: ProductProps) {
                     className={styles.tool}
                     onClick={OpenModal}
                 >
-                    <FiTool />
+                    <FiEdit2 />
                 </button>
                 <button
                     type="button"
