@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "services/api";
 import { useProductsSearch } from "hooks/useProductsSearch";
 import { formatProducts } from "hooks/useFetchProducts";
+import { toastError, toastWarning } from "utils/toasts";
 import styles from "./styles.module.scss";
 
 export function Search() {
@@ -12,23 +13,23 @@ export function Search() {
     const { handleAddProducts } = useProductsSearch();
 
     async function getProductByText(): Promise<IProduct[]> {
-        try {
-            const response = await api.get(`materials?q=${search}`);
-            return response.data;
-        } catch {
-            console.log("Desculpe, mas não achamos o produto pesquisado")
-        }
-        return [];
+        const response = await api.get(`materials?q=${search}`);
+        return response.data;
     }
 
     const { refetch } = useQuery(["product"], getProductByText, {
         enabled: false,
         onSuccess: (data) => {
-            if (data) {
+            if (data.length > 0) {
                 const productsFormatted = formatProducts(data);
                 handleAddProducts(productsFormatted);
+            } else {
+                toastWarning("Desculpe, o produto buscado não existe na nossa base da dados ");
+                handleAddProducts([]);
             }
         },
+        onError: () =>
+            toastError("Ops, houve uma falha na comunicação com o servidor"),
     });
 
     function handleValueInputSearch(search: string) {
