@@ -1,7 +1,6 @@
 import type { AppProps } from 'next/app';
 import Modal from "react-modal";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Footer } from 'components/Footer';
 import { Header } from 'components/Header';
 import { ProductModal } from 'components/ProductModal';
@@ -24,7 +23,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <ProductModal />
                 </ProductProvider>
             </ModalProvider>
-            <ReactQueryDevtools />
         </QueryClientProvider>
     );
 }
