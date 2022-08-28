@@ -86,10 +86,11 @@ export function Form() {
         <form
             onSubmit={modalType.formSubmit}
             className={styles.form}
+            role={"form"}
         >
             <h2>{modalType.title}</h2>
             {modalType.type === 'creation' && (
-                <section className={styles.imageSelection}>
+                <section className={styles.imageSelection} role={"group"}>
                     <header>
                         <h3>Selecione uma imagem:</h3>
                     </header>
@@ -110,7 +111,7 @@ export function Form() {
             <section className={styles.productInformation}>
                 <Input
                     label="Descrição"
-                    name="descricao"
+                    name="description"
                     placeholder={currentProduct?.description}
                     value={description}
                     onChange={e => setDescription(e.target.value)}
@@ -118,7 +119,7 @@ export function Form() {
                 />
                 <Input
                     label="Linha"
-                    name="linha"
+                    name="line"
                     placeholder={currentProduct?.line}
                     value={line}
                     onChange={e => setLine(e.target.value)}
@@ -126,6 +127,7 @@ export function Form() {
                 />
             </section>
             <button
+                role={"button"}
                 type="submit"
                 disabled={!description || !line || !image}>
                 {modalType.buttonLabelSubmit}

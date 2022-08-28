@@ -9,7 +9,7 @@ export function Input({ label, name, ...rest }: InputProps) {
     return (
         <div className={styles.container}>
             <label htmlFor={name}>{label}</label>
-            <input id={name} {...rest} />
+            <input id={name} data-testid={label} {...rest} />
         </div>
     );
 }

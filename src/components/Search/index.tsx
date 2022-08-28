@@ -46,13 +46,15 @@ export function Search() {
     }
 
     return (
-        <form className={styles.container} onSubmit={handleSearchProducts}>
+        <form className={styles.container} onSubmit={handleSearchProducts} role={"searchbox"}>
             <input
                 type="text"
+                name="search"
                 placeholder="Pesquise por descrição ou linha"
                 value={search}
                 onChange={e => handleValueInputSearch(e.target.value)}
                 required
+                role="search"
             />
             <button type="submit">
                 <FiSearch />
