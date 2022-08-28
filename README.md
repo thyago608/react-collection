@@ -1,34 +1,94 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<p align="center">
+ <img src="/public/logo.png" alt="collection" />
+</p>
+<br>
 
-## Getting Started
+## Sobre
 
-First, run the development server:
+O projeto **React Collection**, é uma plataforma de gerenciamento de produtos. O mesmo foi desenvolvido dentro de um período de 4 dias, afim de cumprir o prazo estipulado para um teste. <br><br>
+
+## Desafio Proposto:
+
+**Descrição do teste:**
+
+A tarefa consiste em criar uma lista de materiais e um modal para edição e inserção de novos materiais, seguindo os detalhes:
+	
+Lista: a lista deve conter cards com a imagem do material (url_thumbnail), a descrição(description)  e a linha (line);
+Modal: o modal de alteração deve conter os mesmos campos da listagem, exceto o url_thumbnail.
+
+**Observações:**
+
+A listagem e o modal devem ser responsivos;
+Na listagem, incluir um campo texto para buscar os materiais, por descrição e linha;
+Opções de editar e excluir o material na listagem;
+
+<br>
+
+## Desenvolvimento
+
+Foi desenvolvido o proposto pelo teste, além de adicionar a funcionalidade de páginação e fornecido ao usuário a possibilidade de escolha de imagem no modal de CRIAÇÃO, assim respeitando as definições do teste.
+
+<br>
+
+## Tecnologias utilizadas
+
+- [JSON-Server](https://www.npmjs.com/package/json-server)
+- [Next.js](https://nextjs.org/)
+- [React](https://pt-br.reactjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Sass](https://sass-lang.com/)
+- [Axios](https://axios-http.com/docs/intro)
+- [React Query](https://tanstack.com/query/v4)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
+
+<br>
+
+## Sobre as Tecnologias Utilizadas:
+
+**Next.js**: Framework que fornece uma estrutura de aplicações ReactJS.
+
+**Typescript**: Superset para realizar a tipagem das informações.
+
+**Sass**: Pré-processador css para realizar estilização da aplicação.
+
+**Axios**: Cliente HTTP para o consumo de dados.
+
+**React-Query**: Biblioteca que facilita busca, o armazenamento em cache, sincronização e a atualização do estado do servidor.
+
+**Json-Server**: Biblioteca que gera uma api fake para o consumo, criação, atualização,e remoção de dados.
+
+**React Toastify**: Biblioteca que fornece notificações rápidas para o usuário. 
+
+**React Icons**: Biblioteca de ícones.
+
+<br>
+
+## Sobre os dados utilizados:
+
+Para o teste, foi fornecido pela empresa **Collection** uma lista de produtos que poderia ser utilizado como Mock.
+Foi criado uma api fake através do JSON-Server, utilizando a listagem de produtos fornecida.
+
+<br>
+
+## Como baixar o projeto
 
 ```bash
-npm run dev
-# or
-yarn dev
+ # Clonar repositório
+ $ git clone https://github.com/thyago608/react-collection
+
+ # Entrar no diretório da aplicação
+ $ cd react-collection
+
+ # Baixar as dependências
+ $ yarn install
+
+# Executando o JSON-Server
+ $ yarn server
+    
+ # Executando a aplicação
+ $ yarn dev
 ```
+<br>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Desenvolvido por Thyago Ribeiro 👋
