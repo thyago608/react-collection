@@ -28,6 +28,8 @@ Opções de editar e excluir o material na listagem;
 
 Foi desenvolvido o proposto pelo teste, além de adicionar a funcionalidade de páginação e fornecido ao usuário a possibilidade de escolha de imagem no modal de CRIAÇÃO, assim respeitando as definições do teste.
 
+Foram desenvolvidos testes unitários
+
 <br>
 
 ## Tecnologias utilizadas
