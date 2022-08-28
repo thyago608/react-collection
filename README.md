@@ -74,20 +74,21 @@ Foi criado uma api fake através do JSON-Server, utilizando a listagem de produt
 ## Como baixar o projeto
 
 ```bash
-    # Clonar repositório
-    $ git clone https://github.com/thyago608/react-collection
+ # Clonar repositório
+ $ git clone https://github.com/thyago608/react-collection
 
-    # Entrar no diretório da aplicação
-    $ cd react-collection
+ # Entrar no diretório da aplicação
+ $ cd react-collection
 
-    # Baixar as dependências
-    $ npm install ou yarn install
+ # Baixar as dependências
+ $ npm install ou yarn install
 
-    # Executando a aplicação
-    $ yarn server
+ # Executando a aplicação
+ $ yarn server
     
-    # Executando a aplicação
-    $ yarn dev
+ # Executando a aplicação
+ $ yarn dev
 ```
+<br>
 
 Desenvolvido por Thyago Ribeiro 👋
