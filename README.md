@@ -41,6 +41,8 @@ Foi desenvolvido o proposto pelo teste, além de adicionar a funcionalidade de p
 - [React Query](https://tanstack.com/query/v4)
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
+- [Jest](https://jestjs.io/pt-BR/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
 <br>
 
@@ -61,6 +63,8 @@ Foi desenvolvido o proposto pelo teste, além de adicionar a funcionalidade de p
 **React Toastify**: Biblioteca que fornece notificações rápidas para o usuário. 
 
 **React Icons**: Biblioteca de ícones.
+
+**Jest e React Testing Library**: Biblioteca para realizar testes unitários.
 
 <br>
 
@@ -90,6 +94,9 @@ Foi criado uma api fake através do JSON-Server, utilizando a listagem de produt
     
  # Executando a aplicação
  $ yarn dev
+ 
+ # Executando testes unitários
+ $ yarn test
 ```
 <br>
 
