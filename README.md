@@ -67,7 +67,9 @@ Foi desenvolvido o proposto pelo teste, além de adicionar a funcionalidade de p
 ## Sobre os dados utilizados:
 
 Para o teste, foi fornecido pela empresa **Collection** uma lista de produtos que poderia ser utilizado como Mock.
-Foi criado uma api fake através do JSON-Server, utilizando a listagem de produtos fornecida.<br>
+Foi criado uma api fake através do JSON-Server, utilizando a listagem de produtos fornecida.
+
+<br>
 
 ## Como baixar o projeto
 
