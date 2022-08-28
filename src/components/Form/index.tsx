@@ -1,9 +1,10 @@
+import { FormEvent, useState } from "react";
 import { Input } from "components/Input";
 import { useModal } from "hooks/useModal";
 import { useProducts } from "hooks/useProducts";
 import Image from "next/image";
-import { FormEvent, useState } from "react";
-import { toastInfo, toastSuccess } from "utils/toasts";
+import { FiRefreshCw } from "react-icons/fi";
+import { materialsImages } from "mocks/images";
 import styles from "./styles.module.scss";
 
 export function Form() {
@@ -12,6 +13,7 @@ export function Form() {
     const [description, setDescription] = useState('');
     const [line, setLine] = useState('');
     const [image, setImage] = useState(currentProduct.created_at);
+    const [loading, setLoading] = useState(false);
 
     async function handleCreateNewProduct(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -26,15 +28,22 @@ export function Form() {
                 status: 1,
             }
 
-            await createNewProduct.mutateAsync(product);
+            setLoading(true);
+
+            try {
+                await createNewProduct.mutateAsync(product);
+                setTimeout(() => setLoading(false), 500);
+            } catch {
+                setTimeout(() => setLoading(false), 1000);
+                return;
+            }
+
             handleCloseModal();
-            toastSuccess('Produto Cadastrado com sucesso!');
         }
     }
 
     async function handleUpdateProduct(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-
         const isValid = !!description.trim() && !!line.trim();
 
         if (isValid) {
@@ -45,9 +54,17 @@ export function Form() {
                 created_at: new Date().toISOString()
             }
 
-            await updateProduct.mutateAsync(product);
+            setLoading(true);
+
+            try {
+                await updateProduct.mutateAsync(product);
+                setTimeout(() => setLoading(false), 500);
+            } catch {
+                setTimeout(() => setLoading(false), 1000);
+                return;
+            }
+
             handleCloseModal();
-            toastInfo('Produto Atualizado!');
         }
     }
 
@@ -65,41 +82,6 @@ export function Form() {
             type: 'creation'
         }
 
-    const arrayImages = [
-        {
-            path: "https://d1ptd3zs6hice0.cloudfront.net/Materiais/Porcelanato/Eliane/Eliane_SilexBrancoPo_60x120_Pol_Stack_thumb.jpg",
-            name: "Branco Po"
-        },
-        {
-            path: "https://d1ptd3zs6hice0.cloudfront.net/Materiais/Porcelanato/Eliane/Eliane_SilexPretoPo_90x90_Pol_Stack_thumb.jpg",
-            name: "Preto Po"
-        },
-        {
-            path: "https://d1ptd3zs6hice0.cloudfront.net/Materiais/Porcelanato/Eliane/Eliane_SilexCinzaPo_90x90_Pol_Stack_thumb.jpg",
-            name: "Silex Cinza Po"
-        },
-        {
-            path: "https://d3j9qmbv5hjp0y.cloudfront.net/collection/Porcelanato/Eliane/Eliane_JupiterChumboAc_59x118.2_Ace_Stack_thumb.jpg",
-            name: "Jupiter Chumbo"
-        },
-        {
-            path: "https://d3j9qmbv5hjp0y.cloudfront.net/collection/Porcelanato/Eliane/Eliane_ErosRosaAc_15x15_Ace_Stack_thumb.jpg",
-            name: "Eros Rosa"
-        },
-        {
-            path: "https://d3j9qmbv5hjp0y.cloudfront.net/collection/Porcelanato/Eliane/Eliane_AtenaMarfimPo_59x118.2_Pol_Stack_thumb.jpg",
-            name: "Athena Marfim"
-        },
-        {
-            path: "https://d3j9qmbv5hjp0y.cloudfront.net/collection/Porcelanato/Eliane/Eliane_ZeusBrancoMt_30x90_Met_Stack_thumb.jpg",
-            name: "Zeus Branco"
-        }, {
-            path: "https://d3j9qmbv5hjp0y.cloudfront.net/collection/Porcelanato/Eliane/Eliane_DoricoMarfimMa_30x90_Mat_Stack_thumb.jpg",
-            name: "Dorico Marfim"
-        }
-    ];
-
-
     return (
         <form
             onSubmit={modalType.formSubmit}
@@ -112,7 +94,7 @@ export function Form() {
                         <h3>Selecione uma imagem:</h3>
                     </header>
                     <div className={styles.images}>
-                        {arrayImages.map(item => (
+                        {materialsImages.map(item => (
                             <button
                                 key={item.name}
                                 type="button"
@@ -147,6 +129,7 @@ export function Form() {
                 type="submit"
                 disabled={!description || !line || !image}>
                 {modalType.buttonLabelSubmit}
+                {loading && <FiRefreshCw />}
             </button>
         </form>
     );

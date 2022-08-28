@@ -22,7 +22,7 @@ export function formatProducts(products: IProduct[]) {
 export async function getProducts(
   page: number
 ): Promise<ResponseFetchProducts> {
-  let response = await api.get<IProduct[]>(
+  const response = await api.get<IProduct[]>(
     `materials?_page=${page}&_limit=${LIMIT}&_sort=id&_order=desc`
   );
   const totalProducts = Number(response.headers["x-total-count"]);
@@ -37,7 +37,7 @@ export async function getProducts(
 }
 
 export function useFetchProducts(page: number) {
-  return useQuery(["products", page], async () => await getProducts(page), {
+  return useQuery(["products", page], () => getProducts(page), {
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 }
