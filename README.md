@@ -81,9 +81,9 @@ Foi criado uma api fake através do JSON-Server, utilizando a listagem de produt
  $ cd react-collection
 
  # Baixar as dependências
- $ npm install ou yarn install
+ $ yarn install
 
- # Executando a aplicação
+# Executando o JSON-Server
  $ yarn server
     
  # Executando a aplicação
