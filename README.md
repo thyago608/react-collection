@@ -95,8 +95,10 @@ Foi criado uma api fake através do JSON-Server, utilizando a listagem de produt
  # Executando a aplicação
  $ yarn dev
  
+ # Acesse http://localhost:3000/ em seu navegador
+ 
  # Executando testes unitários
- $ yarn test
+ $ yarn test --watchAll
 ```
 <br>
 
