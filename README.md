@@ -83,7 +83,9 @@ Foi criado uma api fake através do JSON-Server, utilizando a listagem de produt
  # Baixar as dependências
  $ yarn install
 
-# Executando o JSON-Server
+# SERÁ NECESSÁRIO UTILIZAR DOIS TERMINAIS!!
+
+ # Executando o JSON-Server
  $ yarn server
     
  # Executando a aplicação
